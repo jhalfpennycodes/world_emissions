@@ -1034,7 +1034,16 @@ app.post("/", async (req, res) => {
     );
     const response = await axios.get(API_URL + selectedCountry.alpha3);
     const data = response.data;
-    res.json(data);
+    console.log(data);
+    const sendData = {
+      country: selectedCountry.name,
+      rank: data[0].rank,
+      co2: data[0].emissions.co2,
+      worldCo2: data[0].worldEmissions.co2,
+      ch4: data[0].emissions.ch4,
+      worldCh4: data[0].worldEmissions.ch4,
+    };
+    res.json(sendData);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

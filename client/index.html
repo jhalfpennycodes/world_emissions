@@ -12,14 +12,25 @@
         margin: 0;
       }
     </style>
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <div
-      id="chartdiv"
-      style="width: 50%; height: 50%; position: relative; top: 25%; left: 25%"
-    ></div>
-    <p>Country name: <span id="country-name"></span></p>
-    <p>CO2 emissions: <span id="country-CO2"></span></p>
+    <div class="parent">
+      <div class="container">
+        <div class="co2graph">
+          <p>Co2 Emissions</p>
+          <canvas id="co2Chart"></canvas>
+        </div>
+        <div class="ch4graph">
+          <p>Ch4 Emissions</p>
+          <canvas id="ch4Chart"></canvas>
+        </div>
+      </div>
+      <div class="world">
+        <div id="chartdiv" style="width: 100%; height: 100%"></div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

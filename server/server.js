@@ -15,6 +15,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const API_URL = "https://api.climatetrace.org/v6/country/emissions?countries=";
+const CONT_URL =
+  "https://api.climatetrace.org/v6/country/emissions?continents=";
 
 const countries = [
   {
@@ -1033,8 +1035,12 @@ app.post("/", async (req, res) => {
       (country) => country.alpha2 === alpha2Code
     );
     const response = await axios.get(API_URL + selectedCountry.alpha3);
+    const continentResponse = await axios.get(
+      CONT_URL + selectedCountry.continent
+    );
     const data = response.data;
-    console.log(data);
+    const continentData = continentResponse.data;
+    console.log(continentData[0].continent);
     const sendData = {
       country: selectedCountry.name,
       rank: data[0].rank,
@@ -1042,6 +1048,10 @@ app.post("/", async (req, res) => {
       worldCo2: data[0].worldEmissions.co2,
       ch4: data[0].emissions.ch4,
       worldCh4: data[0].worldEmissions.ch4,
+      continent: continentData[0].continent,
+      continentRank: continentData[0].rank,
+      continentCo2: continentData[0].emissions.co2,
+      continentCh4: continentData[0].emissions.ch4,
     };
     res.json(sendData);
   } catch (err) {

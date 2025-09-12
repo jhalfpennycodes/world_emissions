@@ -1,34 +1,45 @@
 import * as am5 from "@amcharts/amcharts5";
 import { createMap } from "./map/mapChart.js";
 import { createPolygonSeries } from "./map/polygonSeries.js";
+import { rotateToCountry } from "./map/rotate.js";
+import { fetchCountryData } from "./services/api.js";
 import { createCo2Chart } from "./charts/co2Chart.js";
 import { createCh4Chart } from "./charts/ch4Chart.js";
-import { fetchCountryData } from "./services/api.js";
+import { updateChart } from "./charts/updateChart.js";
+
+const co2Chart = createCo2Chart(document.getElementById("co2WorldChart"));
+const ch4Chart = createCh4Chart(document.getElementById("ch4WorldChart"));
 
 document.addEventListener("DOMContentLoaded", function () {
   const root = am5.Root.new("chartdiv");
   const chart = createMap(root);
 
-  const co2Chart = createCo2Chart(document.getElementById("co2Chart"));
-  const ch4Chart = createCh4Chart(document.getElementById("ch4Chart"));
+  chart.seriesContainer.resizable = false;
+
+  const polygonSeries = createPolygonSeries(root, chart, selectCountry);
+
+  let radioButton = "world";
 
   async function selectCountry(id) {
     try {
       const data = await fetchCountryData(id);
+      const radios = document.querySelectorAll('input[name="radio"]');
+      updateChart(co2Chart, ch4Chart, radioButton, data);
+      radios.forEach((radio) => {
+        radio.addEventListener("change", () => {
+          const selected = document.querySelector(
+            'input[name="radio"]:checked'
+          );
+          radioButton = selected.value;
+          updateChart(co2Chart, ch4Chart, radioButton, data);
+        });
+      });
 
-      co2Chart.data.labels = [data.country, "Rest of the World"];
-      co2Chart.data.datasets[0].data = [data.co2, data.worldCo2];
-      co2Chart.update();
-
-      ch4Chart.data.labels = [data.country, "Rest of the World"];
-      ch4Chart.data.datasets[0].data = [data.ch4, data.worldCh4];
-      ch4Chart.update();
+      rotateToCountry(chart, polygonSeries, id);
     } catch (err) {
       console.error("Error fetching data:", err.response?.data || err.message);
     }
   }
-
-  createPolygonSeries(root, chart, selectCountry);
 
   chart.animate({
     key: "rotationX",

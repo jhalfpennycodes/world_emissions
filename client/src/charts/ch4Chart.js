@@ -13,5 +13,5 @@ export function createCh4Chart(ctx) {
       ],
     },
   };
-  return new Chart(document.getElementById("ch4Chart"), config);
+  return new Chart(document.getElementById("ch4WorldChart"), config);
 }

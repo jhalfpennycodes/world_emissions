@@ -5,16 +5,16 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
 export function createMap(root) {
   root.setThemes([am5themes_Animated.new(root)]);
-
   let chart = root.container.children.push(
     am5map.MapChart.new(root, {
+      maxZoomLevel: 1,
       panX: "rotateX",
       panY: "rotateY",
       projection: am5map.geoOrthographic(),
-      paddingBottom: 20,
-      paddingTop: 20,
-      paddingLeft: 20,
-      paddingRight: 20,
+      paddingBottom: 30,
+      paddingTop: 30,
+      paddingLeft: 30,
+      paddingRight: 80,
     })
   );
 

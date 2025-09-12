@@ -13,5 +13,5 @@ export function createCo2Chart(ctx) {
       ],
     },
   };
-  return new Chart(document.getElementById("co2Chart"), config);
+  return new Chart(document.getElementById("co2WorldChart"), config);
 }

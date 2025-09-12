@@ -2,62 +2,69 @@
 @import url("https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css");
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=globe");
 
-html {
-  overflow: hidden;
-}
-
-/* My CSS */
+html,
 body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* prevents scrollbars */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-#chartdiv {
-  width: 100%;
-  height: 500px;
-  max-width: 100%;
-}
-
 .parent {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  border: 20px solid black;
-  display: flex;
-  flex-direction: row;
-}
-
-.co2graph {
-  height: 45%;
-}
-
-.world {
-  width: 80%;
-  height: 100%;
-}
-
-.ch4graph {
-  height: 45%;
-}
-
-.text {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 190px;
-  color: #fff;
+  display: grid;
+  grid-template-columns: 55% 45%;
+  height: 100vh; /* make parent fill the viewport */
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  background-color: #ededed;
+  border-radius: 2%;
+  gap: 1rem;
+  padding: 1rem;
   height: 100%;
+  overflow-y: scroll;
 }
 
-/* Button CSS */
+.heading-container {
+  flex: 0 0 auto;
+}
+
+.middle {
+  flex: 0 0 auto; /* don't stretch these sections */
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center; /* horizontal centering */
+  align-items: center; /* vertical centering */
+  flex-direction: column;
+  background: #f9f9f9;
+  border-radius: 5px;
+  padding: 0.2rem;
+  min-height: 500px; /* increase height to give canvas room */
+  max-height: 100%; /* do not exceed parent */
+}
+
+.chart-container canvas {
+  flex: 1;
+  width: 90% !important;
+  height: 90% !important; /* fill container */
+  padding: auto;
+  display: block;
+}
 
 .middle {
   width: 100%;

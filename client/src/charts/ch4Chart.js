@@ -8,10 +8,14 @@ export function createCh4Chart(ctx) {
           label: "CH4 Emissions",
           data: [0, 0],
           backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
-          hoverOffset: 50,
+          hoverOffset: 10,
         },
       ],
     },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+    },
   };
-  return new Chart(document.getElementById("ch4WorldChart"), config);
+  return new Chart(document.getElementById("ch4Chart"), config);
 }

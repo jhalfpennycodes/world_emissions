@@ -7,8 +7,8 @@ import { createCo2Chart } from "./charts/co2Chart.js";
 import { createCh4Chart } from "./charts/ch4Chart.js";
 import { updateChart } from "./charts/updateChart.js";
 
-const co2Chart = createCo2Chart(document.getElementById("co2WorldChart"));
-const ch4Chart = createCh4Chart(document.getElementById("ch4WorldChart"));
+const co2Chart = createCo2Chart(document.getElementById("co2Chart"));
+const ch4Chart = createCh4Chart(document.getElementById("ch4Chart"));
 
 document.addEventListener("DOMContentLoaded", function () {
   const root = am5.Root.new("chartdiv");

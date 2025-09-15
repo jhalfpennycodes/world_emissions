@@ -49,6 +49,13 @@ export function createSectorChart(ctx) {
           display: false,
         },
       },
+      scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
+      },
     },
   };
   return new Chart(document.getElementById("sectorChart"), config);

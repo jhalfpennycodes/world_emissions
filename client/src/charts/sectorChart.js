@@ -55,6 +55,13 @@ export function createSectorChart(ctx) {
             display: false,
           },
         },
+        y: {
+          ticks: {
+            callback: function (value) {
+              return value + " MT"; // 👈 Add your unit here
+            },
+          },
+        },
       },
     },
   };

@@ -36,10 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function selectCountry(id) {
     try {
-      const sectorData = await fetchSectorData(id);
-      if (sectorData) {
-        updateSectorChart(sectorChart, sectorData);
-      }
       data = await fetchCountryData(id);
       document.getElementById("countryName").textContent = data.country;
       document.getElementById("rank").textContent = data.rank;
@@ -47,8 +43,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const radios = document.querySelectorAll('input[name="radio"]');
       updateChart(co2Chart, ch4Chart, radioButton, data);
-
       rotateToCountry(chart, polygonSeries, id);
+      const sectorData = await fetchSectorData(id);
+      if (sectorData) {
+        updateSectorChart(sectorChart, sectorData);
+      }
     } catch (err) {
       console.error("Error fetching data:", err.response?.data || err.message);
     }

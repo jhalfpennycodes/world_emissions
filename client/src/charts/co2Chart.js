@@ -15,6 +15,16 @@ export function createCo2Chart(ctx) {
     options: {
       responsive: false,
       maintainAspectRatio: false,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              let value = context.raw; // raw number
+              return value + "%"; // 👈 add units here
+            },
+          },
+        },
+      },
     },
   };
   return new Chart(document.getElementById("co2Chart"), config);

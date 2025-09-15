@@ -1028,6 +1028,33 @@ const countries = [
   { alpha3: "UNK", alpha2: "UN", name: "Unknown", continent: "Unknown" },
 ];
 
+function calculateWorldPercentage(data) {
+  const countryCo2Percentage =
+    (data[0].emissions.co2 / data[0].worldEmissions.co2) * 100;
+  const countryCh4Percentage =
+    (data[0].emissions.ch4 / data[0].worldEmissions.ch4) * 100;
+  return {
+    countryCo2Percentage,
+    restOfWorldCo2Percentage: 100 - countryCo2Percentage,
+    countryCh4Percentage,
+    restOfWorldCh4Percentage: 100 - countryCh4Percentage,
+  };
+}
+
+function calculateContinentPercentage(countryData, continentData) {
+  const countryCo2Percentage =
+    (countryData[0].emissions.co2 / continentData[0].emissions.co2) * 100;
+  const countryCh4Percentage =
+    (countryData[0].emissions.ch4 / continentData[0].emissions.ch4) * 100;
+
+  return {
+    countryCo2Percentage,
+    restOfContinentCo2Percentage: 100 - countryCo2Percentage,
+    countryCh4Percentage,
+    restOfContinentCh4Percentage: 100 - countryCh4Percentage,
+  };
+}
+
 app.post("/", async (req, res) => {
   try {
     const alpha2Code = req.body.countryCode;
@@ -1040,18 +1067,44 @@ app.post("/", async (req, res) => {
     );
     const data = response.data;
     const continentData = continentResponse.data;
-    console.log(continentData[0].continent);
+
+    const worldPercentages = calculateWorldPercentage(data);
+    const continentPercentages = calculateContinentPercentage(
+      data,
+      continentData
+    );
+
     const sendData = {
       country: selectedCountry.name,
       rank: data[0].rank,
+
+      // absolute world values
       co2: data[0].emissions.co2,
       worldCo2: data[0].worldEmissions.co2,
       ch4: data[0].emissions.ch4,
       worldCh4: data[0].worldEmissions.ch4,
+
+      // world percentages
+      countryCo2Percentage: worldPercentages.countryCo2Percentage,
+      restOfWorldCo2Percentage: worldPercentages.restOfWorldCo2Percentage,
+      countryCh4Percentage: worldPercentages.countryCh4Percentage,
+      restOfWorldCh4Percentage: worldPercentages.restOfWorldCh4Percentage,
+
+      // continent values
       continent: continentData[0].continent,
       continentRank: continentData[0].rank,
       continentCo2: continentData[0].emissions.co2,
       continentCh4: continentData[0].emissions.ch4,
+
+      // continent percentages
+      countryToContinentCo2Percentage:
+        continentPercentages.countryCo2Percentage,
+      restOfContinentCo2Percentage:
+        continentPercentages.restOfContinentCo2Percentage,
+      countryToContinentCh4Percentage:
+        continentPercentages.countryCh4Percentage,
+      restOfContinentCh4Percentage:
+        continentPercentages.restOfContinentCh4Percentage,
     };
     res.json(sendData);
   } catch (err) {

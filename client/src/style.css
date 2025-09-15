@@ -54,16 +54,47 @@ body {
   background: #f9f9f9;
   border-radius: 5px;
   padding: 0.2rem;
-  min-height: 500px; /* increase height to give canvas room */
+  min-height: 550px; /* increase height to give canvas room */
   max-height: 100%; /* do not exceed parent */
 }
 
 .chart-container canvas {
   flex: 1;
-  width: 90% !important;
-  height: 90% !important; /* fill container */
+  width: 80% !important;
+  height: 50% !important; /* fill container */
   padding: auto;
   display: block;
+}
+
+.value-container {
+  display: flex;
+  justify-content: space-between; /* label left, value right */
+  align-items: center;
+  width: 100%;
+  font-size: 13px;
+  margin-top: 0.4rem;
+  padding: 0.2rem 0.4rem;
+  color: #1e3a8a; /* deep blue base */
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 4px;
+}
+
+.emission-values {
+  font-weight: 600;
+  color: #2563eb; /* label in medium blue */
+  flex: 1; /* take available space on left */
+  text-align: left;
+}
+
+.value-container var {
+  font-style: normal;
+  font-weight: bold;
+  color: #3b82f6; /* brighter blue for numbers */
+  max-width: 120px; /* cap width */
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* prevent wrapping */
 }
 
 .middle {

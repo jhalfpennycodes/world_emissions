@@ -6,3 +6,10 @@ export async function fetchCountryData(countryCode) {
   });
   return response.data;
 }
+
+export async function fetchSectorData(countryCode) {
+  const response = await axios.post("http://localhost:8080/sectors", {
+    countryCode,
+  });
+  return response.data;
+}

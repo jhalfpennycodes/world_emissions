@@ -1,6 +1,5 @@
 export function updateChart(co2Chart, ch4Chart, value, data) {
   if (value === "world" && data) {
-    console.log(data.co2);
     document.getElementById("co2-value").textContent = data.co2;
     document.getElementById("restCo2-value").textContent = data.worldCo2;
     document.getElementById("ch4-value").textContent = data.ch4;
@@ -31,7 +30,6 @@ export function updateChart(co2Chart, ch4Chart, value, data) {
     ];
     ch4Chart.update();
   } else if (value === "continent" && data) {
-    console.log(data.co2);
     document.getElementById("co2-value").textContent = data.co2;
     document.getElementById("restCo2-value").textContent = data.continentCo2;
     document.getElementById("ch4-value").textContent = data.ch4;

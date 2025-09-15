@@ -13,7 +13,7 @@ export function createCo2Chart(ctx) {
       ],
     },
     options: {
-      responsive: true,
+      responsive: false,
       maintainAspectRatio: false,
     },
   };

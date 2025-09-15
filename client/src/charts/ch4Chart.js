@@ -13,7 +13,7 @@ export function createCh4Chart(ctx) {
       ],
     },
     options: {
-      responsive: true,
+      responsive: false,
       maintainAspectRatio: false,
     },
   };

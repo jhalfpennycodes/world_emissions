@@ -54,16 +54,37 @@ body {
   background: #f9f9f9;
   border-radius: 5px;
   padding: 0.2rem;
-  min-height: 550px; /* increase height to give canvas room */
+  min-height: 400px; /* increase height to give canvas room */
   max-height: 100%; /* do not exceed parent */
 }
 
 .chart-container canvas {
-  flex: 1;
-  width: 80% !important;
-  height: 50% !important; /* fill container */
+  /* flex: 1; */
+  width: 100% !important;
+  height: 100% !important; /* fill container */
+
   padding: auto;
   display: block;
+}
+
+.sector-chart {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f3f4f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  max-height: 1000px !important;
+  flex-shrink: 0;
+}
+
+.sector-chart canvas {
+  width: auto; /* keep aspect ratio */
+  height: 100%; /* fill container height up to max-height */
 }
 
 .value-container {

@@ -18,6 +18,21 @@ const API_URL = "https://api.climatetrace.org/v6/country/emissions?countries=";
 const CONT_URL =
   "https://api.climatetrace.org/v6/country/emissions?continents=";
 
+const SECTORS_URL = "https://api.climatetrace.org/v6/country/emissions?";
+let selectedCountry;
+
+const sectors = [
+  "buildings",
+  "manufacturing",
+  "fossil-fuel-operations",
+  "agriculture",
+  "transportation",
+  "forestry-and-land-use",
+  "mineral-extraction",
+  "power",
+  "fluorinated-gases",
+];
+
 const countries = [
   {
     alpha3: "ABW",
@@ -1058,7 +1073,7 @@ function calculateContinentPercentage(countryData, continentData) {
 app.post("/", async (req, res) => {
   try {
     const alpha2Code = req.body.countryCode;
-    const selectedCountry = countries.find(
+    selectedCountry = countries.find(
       (country) => country.alpha2 === alpha2Code
     );
     const response = await axios.get(API_URL + selectedCountry.alpha3);
@@ -1107,6 +1122,23 @@ app.post("/", async (req, res) => {
         continentPercentages.restOfContinentCh4Percentage,
     };
     res.json(sendData);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/sectors", async (req, res) => {
+  try {
+    let sectorData = [];
+    for (const sector of sectors) {
+      const sectorResponse = await axios.get(
+        API_URL + selectedCountry.alpha3 + "&sectors=" + sector
+      );
+      sectorData.push({
+        [sector]: sectorResponse.data[0].emissions,
+      });
+    }
+    res.json(sectorData);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

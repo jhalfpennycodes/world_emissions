@@ -13,7 +13,10 @@
       }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/src/style.css" />
     <link rel="stylesheet" />
   </head>
@@ -22,22 +25,20 @@
       <!-- Sidebar -->
 
       <div class="container">
-        <div class="flex items-start mb-6">
-          <i data-feather="globe" class="text-blue-500 mr-2"></i>
-          <div>
-            <h1 class="text-xl font-bold text-gray-800">
-              Global Emissions Visualiser
-            </h1>
-            <p class="text-sm text-gray-500">
-              These visualisations use live data provided by
-              <a
-                href="https://api.climatetrace.org/v6/swagger/index.html#tag/sources/GET/v6/assets"
-                >ClimateTrace API</a
-              >. The data shows the quantity of gas emitted in metric tonnes
-              (1000kg).
-            </p>
-            <p href></p>
-          </div>
+        <div class="bg-white rounded-lg p-4 mb-6">
+          <h1 class="text-xl font-bold text-gray-800">
+            <i class="fa-solid fa-globe" style="color: #4ba0e2"></i> Global
+            Emissions Visualiser
+          </h1>
+          <p class="text-sm text-gray-500">
+            These visualisations use live data provided by
+            <a
+              href="https://api.climatetrace.org/v6/swagger/index.html#tag/sources/GET/v6/assets"
+              >ClimateTrace API</a
+            >. The data shows the quantity of gas emitted in metric tonnes
+            (1000kg).
+          </p>
+          <p href></p>
         </div>
 
         <div class="bg-blue-50 rounded-lg p-4 mb-6">
@@ -58,50 +59,99 @@
           </h4>
         </div>
 
-        <div class="sector-chart">
-          <canvas id="sectorChart"></canvas>
-        </div>
-
-        <div class="flex space-x-2 mb-6">
-          <label class="flex-1">
-            <input
-              type="radio"
-              name="radio"
-              value="world"
-              checked
-              class="hidden peer"
-            />
-            <div
-              class="w-full p-3 text-center rounded-lg border border-gray-200 peer-checked:border-blue-500 peer-checked:bg-blue-50 peer-checked:text-blue-600 cursor-pointer transition-all"
-            >
-              <span>World</span>
-            </div>
-          </label>
-          <label class="flex-1">
-            <input
-              type="radio"
-              name="radio"
-              value="continent"
-              class="hidden peer"
-            />
-            <div
-              class="w-full p-3 text-center rounded-lg border border-gray-200 peer-checked:border-blue-500 peer-checked:bg-blue-50 peer-checked:text-blue-600 cursor-pointer transition-all"
-            >
-              <span>Continent</span>
-            </div>
-          </label>
-        </div>
-        <div class="chart-grid">
-          <div class="chart-container">
-            <p class="text-sm font-medium text-gray-700 mb-2">CO₂ Emissions</p>
-            <canvas id="co2Chart"></canvas>
+        <div class="bg-white rounded-lg p-4 mb-6">
+          <div class="bg-gray-50 rounded-lg p-4 mb-6">
+            <h4 class="text-xl font-bold text-gray-800">
+              Percentage of emissions:
+            </h4>
+            <p>
+              Firstly use the globe to select a country and view its share of
+              CO₂ and CH₄ emissions compared to either the rest of the world or
+              its continent. You can toggle between 'World' and 'Continent'
+              using the buttons below.
+            </p>
           </div>
-          <div class="chart-container">
-            <p class="text-sm font-medium text-gray-700 mb-2">CH₄ Emissions</p>
-            <canvas id="ch4Chart"></canvas>
+          <div class="flex space-x-2 mb-6">
+            <label class="flex-1">
+              <input
+                type="radio"
+                name="radio"
+                value="world"
+                checked
+                class="hidden peer"
+              />
+              <div
+                class="w-full p-3 text-center rounded-lg border border-gray-200 peer-checked:border-blue-500 peer-checked:bg-blue-50 peer-checked:text-blue-600 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-all"
+              >
+                <span>World</span>
+              </div>
+            </label>
+            <label class="flex-1">
+              <input
+                type="radio"
+                name="radio"
+                value="continent"
+                class="hidden peer"
+              />
+              <div
+                class="w-full p-3 text-center rounded-lg border border-gray-200 peer-checked:border-blue-500 peer-checked:bg-blue-50 peer-checked:text-blue-600 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-all"
+              >
+                <span>Continent</span>
+              </div>
+            </label>
+          </div>
+
+          <div class="value-container">
+            <div class="emission-values" id="countryCo2-text">Country CO₂</div>
+            <var id="co2-value"></var>
+          </div>
+          <div class="value-container">
+            <div class="emission-values" id="restCo2-text">Rest CO₂</div>
+            <var id="restCo2-value"></var>
+          </div>
+          <div class="value-container">
+            <div class="emission-values" id="countryCh4-text">Country CH₄</div>
+            <var id="ch4-value"></var>
+          </div>
+          <div class="value-container">
+            <div class="emission-values" id="restCh4-text">Rest CH₄</div>
+            <var id="restCh4-value"></var>
+          </div>
+          <div class="chart-grid">
+            <div class="chart-container">
+              <p class="text-sm font-medium text-gray-700 mb-2">
+                Percentage CO₂ Emissions
+              </p>
+              <canvas id="co2Chart"></canvas>
+            </div>
+            <div class="chart-container">
+              <p class="text-sm font-medium text-gray-700 mb-2">
+                Percentage CH₄ Emissions
+              </p>
+              <canvas id="ch4Chart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg p-4 mb-6">
+          <div class="bg-gray-50 rounded-lg p-4 mb-6">
+            <h4 class="text-xl font-bold text-gray-800">
+              Country's emissions by sector:
+            </h4>
+            <p>
+              View the country's emissions via a bar chart, with each bar
+              representing a sector and its contribution to the country's total
+              emissions. In some cases the forestry and land use will be
+              negative representing a carbon negative effects.
+            </p>
+          </div>
+          <p class="text-sm text-black-500">Country's emissions by sector.</p>
+
+          <div class="sector-chart">
+            <canvas id="sectorChart"></canvas>
           </div>
         </div>
       </div>
+
       <!-- Main Map -->
       <div class="flex-1 relative">
         <div id="chartdiv" class="h-full w-full"></div>
@@ -113,23 +163,6 @@
           </p>
         </div>
       </div>
-    </div>
-
-    <div class="value-container">
-      <div class="emission-values" id="countryCo2-text"></div>
-      <var id="co2-value"></var>
-    </div>
-    <div class="value-container">
-      <div class="emission-values" id="restCo2-text"></div>
-      <var id="restCo2-value"></var>
-    </div>
-    <div class="value-container">
-      <div class="emission-values" id="countryCh4-text"></div>
-      <var id="ch4-value"></var>
-    </div>
-    <div class="value-container">
-      <div class="emission-values" id="restCh4-text"></div>
-      <var id="restCh4-value"></var>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

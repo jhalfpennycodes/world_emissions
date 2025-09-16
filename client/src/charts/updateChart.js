@@ -1,9 +1,17 @@
 export function updateChart(co2Chart, ch4Chart, value, data) {
   if (value === "world" && data) {
-    document.getElementById("co2-value").textContent = data.co2;
-    document.getElementById("restCo2-value").textContent = data.worldCo2;
-    document.getElementById("ch4-value").textContent = data.ch4;
-    document.getElementById("restCh4-value").textContent = data.worldCh4;
+    document.getElementById(
+      "co2-value"
+    ).textContent = `${data.co2.toLocaleString()} MT`;
+    document.getElementById(
+      "restCo2-value"
+    ).textContent = `${data.worldCo2.toLocaleString()} MT`;
+    document.getElementById(
+      "ch4-value"
+    ).textContent = `${data.ch4.toLocaleString()} MT`;
+    document.getElementById(
+      "restCh4-value"
+    ).textContent = `${data.worldCh4.toLocaleString()} MT`;
 
     document.getElementById(
       "countryCo2-text"

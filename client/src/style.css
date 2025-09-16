@@ -40,7 +40,7 @@ body {
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
   gap: 1rem;
   flex: 1 1 0;
   min-height: 0;
@@ -52,7 +52,7 @@ body {
   align-items: center; /* vertical centering */
   flex-direction: column;
   background: #f9f9f9;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 0.2rem;
   min-height: 400px; /* increase height to give canvas room */
   max-height: 100%; /* do not exceed parent */
@@ -89,33 +89,41 @@ body {
 
 .value-container {
   display: flex;
-  justify-content: space-between; /* label left, value right */
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
-  font-size: 13px;
-  margin-top: 0.4rem;
-  padding: 0.2rem 0.4rem;
-  color: #1e3a8a; /* deep blue base */
-  background: rgba(59, 130, 246, 0.05);
-  border-radius: 4px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .emission-values {
+  font-size: 1rem;
   font-weight: 600;
-  color: #2563eb; /* label in medium blue */
-  flex: 1; /* take available space on left */
-  text-align: left;
+  color: #333;
+  flex: 1;
 }
 
-.value-container var {
-  font-style: normal;
+var {
+  font-size: 1rem;
   font-weight: bold;
-  color: #3b82f6; /* brighter blue for numbers */
-  max-width: 120px; /* cap width */
+  color: #0077cc;
+  min-width: 60px;
   text-align: right;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap; /* prevent wrapping */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .value-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  var {
+    text-align: left;
+    margin-top: 4px;
+  }
 }
 
 .middle {

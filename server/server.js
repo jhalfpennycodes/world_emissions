@@ -30,7 +30,6 @@ const sectors = [
   "forestry-and-land-use",
   "mineral-extraction",
   "power",
-  "fluorinated-gases",
 ];
 
 const countries = [

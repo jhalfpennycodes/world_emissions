@@ -7,7 +7,6 @@ const labels = [
   "forestry-and-land-use",
   "mineral-extraction",
   "power",
-  "fluorinated-gases",
 ];
 
 export function createSectorChart(ctx) {

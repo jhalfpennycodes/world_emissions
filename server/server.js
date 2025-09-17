@@ -1107,7 +1107,6 @@ app.post("/", async (req, res) => {
     );
     const data = response.data;
     const continentData = continentResponse.data;
-    conso;
     console.log("Response data: ", data);
     console.log("Continent response data: ", continentData);
     const worldPercentages = calculateWorldPercentage(data);

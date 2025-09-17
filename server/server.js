@@ -1114,7 +1114,6 @@ app.post("/", async (req, res) => {
       data,
       continentData
     );
-    console.log("DATA to send: ", sendData);
     const sendData = {
       country: selectedCountry.name,
       rank: data[0].rank,

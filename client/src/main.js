@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
   async function selectCountry(id) {
     try {
       data = await fetchCountryData(id);
+      console.log(data);
       document.getElementById("countryName").textContent = data.country;
       document.getElementById("rank").textContent = data.rank;
       document.getElementById("continentName").textContent = data.continent;

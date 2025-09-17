@@ -21,13 +21,21 @@ const limiter = rateLimit({
 
 app.use(
   cors({
-    origin: CLIENT_URL,
+    origin: [CLIENT_URL],
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
-app.use("/", limiter);
+
+// Handle preflight requests first
+app.options(/.*/, cors());
+
+// Skip rate limiter for OPTIONS
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") return next();
+  limiter(req, res, next);
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

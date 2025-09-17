@@ -22,7 +22,7 @@ const limiter = rateLimit({
 
 app.use(
   cors({
-    methods: ["POST"],
+    methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })

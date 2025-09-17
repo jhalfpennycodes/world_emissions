@@ -1094,21 +1094,16 @@ function calculateContinentPercentage(countryData, continentData) {
 
 app.post("/", async (req, res) => {
   try {
-    console.log("hit");
     const alpha2Code = req.body.countryCode;
     selectedCountry = countries.find(
       (country) => country.alpha2 === alpha2Code
     );
-    console.log("Selected country: ", selectedCountry);
-    console.log("Country alpha 3 code: ", selectedCountry.alpha3);
     const response = await axios.get(API_URL + selectedCountry.alpha3);
     const continentResponse = await axios.get(
       CONT_URL + selectedCountry.continent
     );
     const data = response.data;
     const continentData = continentResponse.data;
-    console.log("Response data: ", data);
-    console.log("Continent response data: ", continentData);
     const worldPercentages = calculateWorldPercentage(data);
     const continentPercentages = calculateContinentPercentage(
       data,

@@ -7,10 +7,9 @@ export async function fetchCountryData(countryCode) {
     });
     return response.data;
   } catch (err) {
-    console.log(err.response.data);
-    // window.alert(
-    //   `${err.message} \n Too many request to API, please try again in one hour`
-    // );
+    window.alert(
+      `${err.message} \n Too many request to API, please try again in one hour`
+    );
   }
 }
 
@@ -24,8 +23,6 @@ export async function fetchSectorData(countryCode) {
     );
     return response.data;
   } catch (err) {
-    console.log(err.response.data);
-
-    // `${err.message} \n Too many request to API, please try again in one hour`;
+    `${err.message} \n Too many request to API, please try again in one hour`;
   }
 }

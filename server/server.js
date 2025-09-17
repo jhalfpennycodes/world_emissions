@@ -9,6 +9,8 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
+const API_URL = process.env.API_URL;
+const CONT_URL = process.env.CONT_URL;
 
 const limiter = rateLimit({
   max: 100,
@@ -21,10 +23,6 @@ app.use("/", limiter);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-const API_URL = "https://api.climatetrace.org/v6/country/emissions?countries=";
-const CONT_URL =
-  "https://api.climatetrace.org/v6/country/emissions?continents=";
 
 let selectedCountry;
 

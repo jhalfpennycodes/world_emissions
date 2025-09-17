@@ -19,7 +19,13 @@ const limiter = rateLimit({
   message: "Too many requests to API please try again in an hour",
 });
 
-app.use(cors({ origin: CLIENT_URL }));
+app.use(
+  cors({
+    origin: CLIENT_URL,
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 app.use("/", limiter);
 
 app.use(bodyParser.urlencoded({ extended: true }));

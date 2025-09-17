@@ -3,13 +3,21 @@ import axios from "axios";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cors from "cors";
+import rateLimit from "express-rate-limit";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
 
-app.use(cors({ origin: "http://localhost:5173" }));
+const limiter = rateLimit({
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: "Too many requests to API please try again in an hour",
+});
+
+app.use(cors());
+app.use("/", limiter);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -18,7 +26,6 @@ const API_URL = "https://api.climatetrace.org/v6/country/emissions?countries=";
 const CONT_URL =
   "https://api.climatetrace.org/v6/country/emissions?continents=";
 
-const SECTORS_URL = "https://api.climatetrace.org/v6/country/emissions?";
 let selectedCountry;
 
 const sectors = [

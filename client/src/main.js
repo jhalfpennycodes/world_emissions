@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("rank").textContent = data.rank;
       document.getElementById("continentName").textContent = data.continent;
 
-      const radios = document.querySelectorAll('input[name="radio"]');
       updateChart(co2Chart, ch4Chart, radioButton, data);
       rotateToCountry(chart, polygonSeries, id);
       const sectorData = await fetchSectorData(id);

@@ -32,10 +32,10 @@ app.use(
 app.options(/.*/, cors());
 
 // Skip rate limiter for OPTIONS
-app.use((req, res, next) => {
-  if (req.method === "OPTIONS") return next();
-  limiter(req, res, next);
-});
+// app.use((req, res, next) => {
+//   if (req.method === "OPTIONS") return next();
+//   limiter(req, res, next);
+// });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

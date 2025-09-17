@@ -12,6 +12,7 @@ const port = process.env.PORT;
 const API_URL = process.env.API_URL;
 const CONT_URL = process.env.CONT_URL;
 const CLIENT_URL = process.env.CLIENT_URL;
+const CLIENT_URL_2 = process.env.CLIENT_URL_2;
 
 const limiter = rateLimit({
   max: 100,
@@ -21,7 +22,7 @@ const limiter = rateLimit({
 
 app.use(
   cors({
-    origin: [CLIENT_URL],
+    origin: [CLIENT_URL, CLIENT_URL_2],
     methods: ["POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -29,7 +30,7 @@ app.use(
 );
 
 // Handle preflight requests first
-app.options(/.*/, cors());
+// app.options(/.*/, cors());
 
 // Skip rate limiter for OPTIONS
 // app.use((req, res, next) => {

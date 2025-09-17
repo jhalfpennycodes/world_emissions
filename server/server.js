@@ -22,7 +22,7 @@ const limiter = rateLimit({
 app.use(
   cors({
     origin: [CLIENT_URL],
-    methods: ["POST", "OPTIONS"],
+    methods: ["POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
@@ -36,6 +36,8 @@ app.options(/.*/, cors());
 //   if (req.method === "OPTIONS") return next();
 //   limiter(req, res, next);
 // });
+
+app.use("/", limiter);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

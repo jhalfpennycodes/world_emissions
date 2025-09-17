@@ -1094,6 +1094,7 @@ function calculateContinentPercentage(countryData, continentData) {
 
 app.post("/", async (req, res) => {
   try {
+    console.log("hit");
     const alpha2Code = req.body.countryCode;
     selectedCountry = countries.find(
       (country) => country.alpha2 === alpha2Code

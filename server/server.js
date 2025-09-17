@@ -11,6 +11,7 @@ const app = express();
 const port = process.env.PORT;
 const API_URL = process.env.API_URL;
 const CONT_URL = process.env.CONT_URL;
+const CLIENT_URL = process.env.CLIENT_URL;
 
 const limiter = rateLimit({
   max: 100,
@@ -18,7 +19,7 @@ const limiter = rateLimit({
   message: "Too many requests to API please try again in an hour",
 });
 
-app.use(cors());
+app.use(cors({ origin: CLIENT_URL }));
 app.use("/", limiter);
 
 app.use(bodyParser.urlencoded({ extended: true }));

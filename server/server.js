@@ -29,15 +29,6 @@ app.use(
   })
 );
 
-// Handle preflight requests first
-// app.options(/.*/, cors());
-
-// Skip rate limiter for OPTIONS
-// app.use((req, res, next) => {
-//   if (req.method === "OPTIONS") return next();
-//   limiter(req, res, next);
-// });
-
 app.use("/", limiter);
 
 app.use(bodyParser.urlencoded({ extended: true }));

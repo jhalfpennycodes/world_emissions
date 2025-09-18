@@ -22,6 +22,7 @@ const limiter = rateLimit({
 
 app.use(
   cors({
+    origin: CLIENT_URL,
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -37,7 +38,7 @@ app.use(
 //   limiter(req, res, next);
 // });
 
-// app.use("/", limiter);
+app.use("/", limiter);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

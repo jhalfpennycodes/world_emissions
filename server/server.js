@@ -12,7 +12,6 @@ const port = process.env.PORT;
 const API_URL = process.env.API_URL;
 const CONT_URL = process.env.CONT_URL;
 const CLIENT_URL = process.env.CLIENT_URL;
-const CLIENT_URL_2 = process.env.CLIENT_URL_2;
 
 const limiter = rateLimit({
   max: 100,

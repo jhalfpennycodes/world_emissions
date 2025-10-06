@@ -1,17 +1,21 @@
 export function updateChart(co2Chart, ch4Chart, value, data) {
   if (value === "world" && data) {
-    document.getElementById(
-      "co2-value"
-    ).textContent = `${data.co2.toLocaleString()} MT`;
-    document.getElementById(
-      "restCo2-value"
-    ).textContent = `${data.worldCo2.toLocaleString()} MT`;
-    document.getElementById(
-      "ch4-value"
-    ).textContent = `${data.ch4.toLocaleString()} MT`;
-    document.getElementById(
-      "restCh4-value"
-    ).textContent = `${data.worldCh4.toLocaleString()} MT`;
+    document.getElementById("co2-value").textContent = `${Number(data.co2)
+      .toExponential(2)
+      .toLocaleString()} MT`;
+    document.getElementById("restCo2-value").textContent = `${Number(
+      data.worldCo2
+    )
+      .toExponential(2)
+      .toLocaleString()} MT`;
+    document.getElementById("ch4-value").textContent = `${Number(data.ch4)
+      .toExponential(2)
+      .toLocaleString()} MT`;
+    document.getElementById("restCh4-value").textContent = `${Number(
+      data.worldCh4
+    )
+      .toExponential(2)
+      .toLocaleString()} MT`;
 
     document.getElementById(
       "countryCo2-text"
@@ -38,10 +42,22 @@ export function updateChart(co2Chart, ch4Chart, value, data) {
     ];
     ch4Chart.update();
   } else if (value === "continent" && data) {
-    document.getElementById("co2-value").textContent = data.co2;
-    document.getElementById("restCo2-value").textContent = data.continentCo2;
-    document.getElementById("ch4-value").textContent = data.ch4;
-    document.getElementById("restCh4-value").textContent = data.continentCh4;
+    document.getElementById("co2-value").textContent = `${Number(data.co2)
+      .toExponential(2)
+      .toLocaleString()} MT`;
+    document.getElementById("restCo2-value").textContent = `${Number(
+      data.continentCo2
+    )
+      .toExponential(2)
+      .toLocaleString()} MT`;
+    document.getElementById("ch4-value").textContent = `${Number(data.ch4)
+      .toExponential(2)
+      .toLocaleString()} MT`;
+    document.getElementById("restCh4-value").textContent = `${Number(
+      data.continentCh4
+    )
+      .toExponential(2)
+      .toLocaleString()} MT`;
 
     document.getElementById(
       "countryCo2-text"

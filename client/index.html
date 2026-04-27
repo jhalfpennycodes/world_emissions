@@ -161,7 +161,12 @@
 
       <!-- Main Map -->
       <div class="flex-1 relative">
-        <div id="chartdiv" class="h-full w-full"></div>
+        <div id="chartdiv" class="h-full w-full">
+          <div class="map-loading-pill" id="mapLoadingPill">
+            <div class="loading-spinner"></div>
+            <span class="loading-label">Loading…</span>
+          </div>
+        </div>
         <div
           class="absolute top-10 left-1/2 transform -translate-x-1/2 bg-white p-2 rounded-xl shadow-lg border border-gray-300"
         >

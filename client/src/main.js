@@ -34,7 +34,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+const container = document.querySelector(".container"); // adjust selector if needed
+container.style.position = "relative"; // needed for absolute overlay positioning
+
+const overlay = document.createElement("div");
+overlay.className = "loading-overlay";
+overlay.innerHTML = `
+  <div class="loading-pill">
+    <div class="loading-spinner"></div>
+    <span class="loading-label">Loading…</span>
+  </div>
+`;
+container.appendChild(overlay);
+
+
+const mapPill = document.getElementById("mapLoadingPill");
+
+function setLoading(active) {
+  overlay.classList.toggle("visible", active);
+  mapPill.classList.toggle("visible", active);
+}
+
   async function selectCountry(id) {
+    setLoading(true);  
     try {
       data = await fetchCountryData(id);
       document.getElementById("countryName").textContent = data.country;
@@ -49,6 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     } catch (err) {
       console.error("Error fetching data:", err.response?.data || err.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -61,3 +85,4 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   chart.appear(1000, 100);
 });
+

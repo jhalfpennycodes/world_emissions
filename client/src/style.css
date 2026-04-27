@@ -229,8 +229,11 @@ var {
 
 /* ── Loading spinner ──────────────────────────────────────── */
 .loading-overlay {
-  position: absolute;
-  inset: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 45%; /* matches the .container column width (45% of the grid) */
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -293,14 +293,19 @@ var {
   background: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 8px 16px;
+  padding: 10px 20px;
+  bottom: 24px;
+
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
   position: absolute;
-  bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
 }
 
+.map-loading-pill .loading-spinner {
+  width: 20px;
+  height: 20px;
+}
 .map-loading-pill.visible {
   display: flex;
 }
